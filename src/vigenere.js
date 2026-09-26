@@ -17,13 +17,23 @@ function criptografarLetra(letra, chave) {
     return numeroParaLetra(soma)
 }
 
+function descriptografarLetra(letra, chave){
+    const numLetra = letraParaNumero(letra)
+    const numChave = letraParaNumero(chave)
+
+    const sub = (numLetra - numChave + 26) % 26
+
+    return numeroParaLetra(sub)
+
+}
+
 function criptografar(mensagem, chave) {
     let resultado = ""
 
     for (let i = 0; i < mensagem.length; i++) {
         const letraMensagem = mensagem[i];
+        const letraChave = chave[i % chave.length] 
 
-        const letraChave = chave[i % chave.length] //quando a chave é menor que a mensagem, ela é reutilizada desde o índice inicial enquanto ainda houver letras da mensagem para criptografar.
         const letraCriptografada = criptografarLetra(letraMensagem, letraChave)
 
         resultado = resultado + letraCriptografada
@@ -33,8 +43,21 @@ function criptografar(mensagem, chave) {
      return resultado //retorna a mensagem totlmente cifrada
 }
 
-const testOne = criptografar("ATAQUE", "SENHA")
+function descriptografar(mensageCripto, chave) {
+    let mensagemDescripto = ""
 
-console.log(testOne)
+    for (let i = 0; i < mensageCripto.length; i ++) {       
+        const letraCripto = mensageCripto[i]
+        const letraChave = chave[i % chave.length]
 
+        const letraDescriptografada = descriptografarLetra (letraCripto, letraChave)
+
+        mensagemDescripto = mensagemDescripto + letraDescriptografada
+    }
+
+    return mensagemDescripto
+
+}
+
+console.log(descriptografar("SXNXUW", "SENHA"))
 
