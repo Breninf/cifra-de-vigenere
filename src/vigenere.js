@@ -1,14 +1,13 @@
-function letraParaNumero (letra) {
+function letraParaNumero(letra) {
     const numero = letra.toUpperCase().charCodeAt(0) - "A".charCodeAt(0)
     return numero
 }
 
-function numeroParaLetra (numero){
+function numeroParaLetra(numero){
     const letra = String.fromCharCode(numero + "A".charCodeAt(0))
     return letra 
 }
 
-// O % 26 (resto da divisão) garante que o alfabeto "dê a volta". OBS: RESTO DE DIVISÃO INTEIRA
 function criptografarLetra(letra, chave) {
     const numLetra = letraParaNumero(letra)
     const numChave = letraParaNumero(chave)
@@ -18,13 +17,24 @@ function criptografarLetra(letra, chave) {
     return numeroParaLetra(soma)
 }
 
-console.log(criptografarLetra("B", "C"))
+function criptografar(mensagem, chave) {
+    let resultado = ""
 
+    for (let i = 0; i < mensagem.length; i++) {
+        const letraMensagem = mensagem[i];
 
-console.log(criptografarLetra("Y", "D"))
+        const letraChave = chave[i % chave.length] //quando a chave é menor que a mensagem, ela é reutilizada desde o índice inicial enquanto ainda houver letras da mensagem para criptografar.
+        const letraCriptografada = criptografarLetra(letraMensagem, letraChave)
 
+        resultado = resultado + letraCriptografada
+        
+    }
 
-console.log(criptografarLetra("Z", "Z"))
+     return resultado //retorna a mensagem totlmente cifrada
+}
 
+const testOne = criptografar("ATAQUE", "SENHA")
+
+console.log(testOne)
 
 
