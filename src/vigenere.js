@@ -66,14 +66,33 @@ const rl =  readline.createInterface({
     output: process.stdout
 })
 
-rl.question('Digite uma mensagem: ', (mensagem) => {
+console.log('Bem vindo ao Codificador e Descodificador de Vigenere!')
 
+rl.question('Se quiser Criptografar digite Y; se não, digite N: ', (resposta) => {
+    if (resposta.toUpperCase() === 'Y') {
+        rl.question('Digite uma mensagem: ', (mensagem) => {
 
-    rl.question('Digite uma chave: ', (chave) => {
-        
-        console.log(criptografar(mensagem, chave))
+            rl.question('Digite uma chave: ', (chave) => {
+                console.log(criptografar(mensagem, chave))
 
-        rl.close();
-    })
- 
-})
+                rl.close()
+            })
+        })
+
+    } else if (resposta.toUpperCase() === 'N'){
+        rl.question('Digite a mensagem criptografada: ', (mensagemCripto) => {
+
+            rl.question('Digite a chave: ', (chave) => {
+                console.log(descriptografar(mensagemCripto, chave))
+
+                rl.close()
+            })
+        })
+
+    } else {
+        console.log('Opção inválida')
+
+        rl.close()
+    }
+}
+)
