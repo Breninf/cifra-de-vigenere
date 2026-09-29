@@ -73,7 +73,7 @@ rl.question('Se quiser Criptografar digite Y; se não, digite N: ', (resposta) =
         rl.question('Digite uma mensagem: ', (mensagem) => {
 
             rl.question('Digite uma chave: ', (chave) => {
-                console.log(criptografar(mensagem, chave))
+                console.log(`Mensagem criptografada: ${criptografar(mensagem, chave)}`)
 
                 rl.close()
             })
@@ -83,7 +83,7 @@ rl.question('Se quiser Criptografar digite Y; se não, digite N: ', (resposta) =
         rl.question('Digite a mensagem criptografada: ', (mensagemCripto) => {
 
             rl.question('Digite a chave: ', (chave) => {
-                console.log(descriptografar(mensagemCripto, chave))
+                    console.log(`Mensagem descriptografada: ${descriptografar(mensagemCripto, chave)}`)
 
                 rl.close()
             })
