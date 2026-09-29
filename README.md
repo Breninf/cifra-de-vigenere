@@ -1,6 +1,6 @@
 # 🔐 Cifra de Vigenère
 
-Implementação da **Cifra de Vigenère** para a disciplina de **Segurança da Informação**
+Implementação interativa da **Cifra de Vigenère** desenvolvida para a disciplina de **Segurança da Informação**, utilizando uma interface de linha de comando (CLI) dinâmica.
 
 ## 📚 Sobre a atividade
 
@@ -9,92 +9,57 @@ A atividade consiste em desenvolver um programa capaz de realizar:
 * 🔒 **Encriptação** de mensagens utilizando a Cifra de Vigenère;
 * 🔓 **Decriptação** de mensagens utilizando a chave correspondente.
 
-A Cifra de Vigenère é uma técnica de criptografia baseada na substituição de caracteres utilizando uma **chave** para determinar os deslocamentos das letras.
+A Cifra de Vigenère é uma técnica de criptografia polialfabética baseada na substituição de caracteres, utilizando uma **chave** dinâmica para determinar os deslocamentos das letras de forma a quebrar padrões repetitivos.
 
-## 🧠 Como funciona
+## 🧠 Engenharia por trás do código
+
+Este projeto foi além da lógica matemática da cifra, servindo como laboratório prático para consolidar conceitos profundos de **Ciência da Computação** e do ecossistema do **Node.js**:
+
+* **Gerenciamento de Memória de Baixo Nível (RAM):** Manipulação controlada de dados utilizando a **Stack** (para tipos primitivos e os ponteiros imutáveis travados por `const`) e a **Heap** (espaço dinâmico onde os objetos, arrays e módulos são instanciados).
+* **Processamento Assíncrono e Streams (I/O):** Uso do módulo nativo `readline` integrado aos canos de comunicação do Sistema Operacional: `process.stdin` (fluxo de entrada focado no teclado) e `process.stdout` (fluxo de saída interativo focado na renderização em tempo real na tela).
+* **Arquitetura Multi-Componente do Node.js:** Entendimento prático de como o **Motor V8** (interpretador JavaScript síncrono e single-thread) atua em conjunto com a **Libuv** (mecanismo assíncrono e multithread) através da orquestração e agendamento de *callbacks* gerenciados pelo **Event Loop**.
+
+## ⚙️ Como funciona a Cifra
 
 Para realizar a criptografia, cada letra é associada a um valor numérico:
 
 ```text
-A = 0
-B = 1
-C = 2
-...
-Z = 25
+A = 0, B = 1, C = 2 ... Z = 25
 ```
 
-A chave é repetida até acompanhar o tamanho da mensagem.
+A chave é repetida de forma modular através do operador de resto (`% chave.length`) para acompanhar perfeitamente o tamanho da mensagem.
 
 A fórmula utilizada para a **encriptação** é:
-
 ```text
 C = (M + K) % 26
 ```
 
-Onde:
-
-* `C` = caractere cifrado;
-* `M` = caractere da mensagem original;
-* `K` = caractere correspondente da chave;
-* `% 26` = mantém o resultado dentro do intervalo de 0 a 25.
-
-Para realizar a **decriptação**, utiliza-se a operação inversa:
-
+Para realizar a **decriptação**, utiliza-se a operação inversa somando o intervalo alfabético para prevenir resultados negativos:
 ```text
 M = (C - K + 26) % 26
 ```
-
-## 💡 Exemplo
-
-Mensagem:
-
-```text
-ATAQUE
-```
-
-Chave:
-
-```text
-SENHA
-```
-
-A chave é repetida para acompanhar o tamanho da mensagem:
-
-```text
-Mensagem: ATAQUE
-Chave:    SENHAS
-```
-
-Cada caractere é convertido para um valor de `0` a `25`. Em seguida, são realizadas as operações matemáticas para produzir o texto cifrado.
-
-## 🛠️ Tecnologias
-
-* JavaScript
-* Node.js
-* Git
-* GitHub
-
-## 🎯 Objetivos de aprendizagem
-
-Com esta atividade, o objetivo é compreender:
-
-* O funcionamento básico da Cifra de Vigenère;
-* O conceito de chave em uma cifra;
-* A conversão de caracteres para valores numéricos;
-* Operações matemáticas aplicadas à criptografia;
-* O funcionamento do operador `%` (módulo);
-* O processo de encriptação e decriptação;
-* A implementação de conceitos de criptografia utilizando programação.
 
 ## 📁 Estrutura do projeto
 
 ```text
 cifra-vigenere/
-
+├── src/
+│   └── vigenere.js     # Contém as funções matemáticas e a CLI interativa
+└── README.md           # Documentação completa do projeto
 ```
 
-## ▶️ Execução
+## 🛠️ Tecnologias
 
-Com o Node.js instalado, execute:
+* **JavaScript** (Ecossistema ES6+)
+* **Node.js** (Ambiente de execução de código)
+* **Git & GitHub** (Versionamento e documentação)
 
+## ▶️ Como Executar
 
+Com o Node.js instalado em seu computador, abra o terminal na pasta raiz do projeto e execute o comando indicando o caminho correto da pasta `src`:
+
+```bash
+node src/vigenere.js
+```
+
+O programa iniciará um menu dinâmico no terminal perguntando se você deseja criptografar ou descriptografar, gerenciando o ciclo de vida da interface de leitura e encerrando o processo de forma limpa na memória após o resultado final.
