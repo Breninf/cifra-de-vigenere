@@ -1,3 +1,5 @@
+const readline = require('readline')
+
 function letraParaNumero(letra) {
     const numero = letra.toUpperCase().charCodeAt(0) - "A".charCodeAt(0)
     return numero
@@ -40,14 +42,14 @@ function criptografar(mensagem, chave) {
         
     }
 
-     return resultado //retorna a mensagem totlmente cifrada
+     return resultado //retorna a mensagem totalmente cifrada
 }
 
-function descriptografar(mensageCripto, chave) {
+function descriptografar(mensagemCripto, chave) {
     let mensagemDescripto = ""
 
-    for (let i = 0; i < mensageCripto.length; i ++) {       
-        const letraCripto = mensageCripto[i]
+    for (let i = 0; i < mensagemCripto.length; i ++) {       
+        const letraCripto = mensagemCripto[i]
         const letraChave = chave[i % chave.length]
 
         const letraDescriptografada = descriptografarLetra (letraCripto, letraChave)
@@ -59,5 +61,19 @@ function descriptografar(mensageCripto, chave) {
 
 }
 
-console.log(descriptografar("SXNXUW", "SENHA"))
+const rl =  readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
+rl.question('Digite uma mensagem: ', (mensagem) => {
+
+
+    rl.question('Digite uma chave: ', (chave) => {
+        
+        console.log(criptografar(mensagem, chave))
+
+        rl.close();
+    })
+ 
+})
